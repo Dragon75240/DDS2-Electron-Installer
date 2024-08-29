@@ -1,0 +1,32 @@
+.menuBar {
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+	padding-left: 20px;
+}
+
+.ant-btn {
+	background-color: #333;
+	border-color: #444;
+	color: white;
+}
+
+.ant-btn:hover,
+.ant-btn:focus,
+.ant-btn:active {
+	background-color: #555;
+	border-color: #666;
+}
+
+.ant-btn-primary {
+	background-color: #007bff;
+	border-color: #0080ff;
+	color: white;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus,
+.ant-btn-primary:active {
+	background-color: #0056b2;
+	border-color: #0066cc;
+}
