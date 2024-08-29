@@ -1,9 +1,0 @@
-.menuBar {
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-}
-
-.ant-btn-circle {
-	margin-right: 10;
-}

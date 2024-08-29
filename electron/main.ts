@@ -1,7 +1,8 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow } from 'electron'
 //import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
+import { attachTitlebarToWindow, setupTitlebar } from 'custom-electron-titlebar/main'
 
 //const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -26,12 +27,15 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, 
 
 let win: BrowserWindow | null
 
+setupTitlebar()
+
 function createWindow() {
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
     },
+    titleBarStyle: "hidden"
   })
 
   // Test active push message to Renderer-process.
@@ -45,6 +49,8 @@ function createWindow() {
     // win.loadFile('dist/index.html')
     win.loadFile(path.join(RENDERER_DIST, 'index.html'))
   }
+
+  attachTitlebarToWindow(win);
 }
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -63,15 +69,6 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow()
   }
-})
-
-ipcMain.on('DisableFullScreen', () => {
-  win?.minimize()
-  win?.show()
-})
-
-ipcMain.on('EnableFullScreen', () => {
-  win?.maximize()
 })
 
 app.whenReady().then(createWindow)

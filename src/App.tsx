@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import "./App.css";
-import MenuBar from "./components/MenuBar";
 import { Checkbox } from "antd";
 
 interface Item {
@@ -34,7 +33,6 @@ function App() {
 	return (
 		<>
 			<div className="App">
-				<MenuBar></MenuBar>
 				<table className="spreadsheet-table">
 					<thead>
 						<tr>

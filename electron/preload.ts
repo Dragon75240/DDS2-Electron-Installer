@@ -1,3 +1,4 @@
+import { Titlebar, TitlebarColor } from 'custom-electron-titlebar'
 import { ipcRenderer, contextBridge } from 'electron'
 
 // --------- Expose some API to the Renderer process ---------
@@ -22,3 +23,9 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
   // You can expose other APTs you need here.
   // ...
 })
+
+
+window.addEventListener('DOMContentLoaded', () => {
+  new Titlebar({
+    backgroundColor: TitlebarColor.fromHex("#333")})
+});
