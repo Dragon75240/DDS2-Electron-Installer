@@ -3,6 +3,7 @@
 import { useState } from "react";
 import "./App.css";
 import MenuBar from "./components/MenuBar";
+import { Checkbox } from "antd";
 
 interface Item {
 	id: number;
@@ -13,16 +14,21 @@ interface Item {
 function App() {
 	const [checkedItems, setCheckedItems] = useState<Item[]>([]);
 	const items: Item[] = [
-		{ id: 1, name: "Item 1", description: "idk" },
-		{ id: 2, name: "Item 2", description: "Another item" },
+		{ id: 1, name: "Item 1", description: "idk"},
+		{ id: 2, name: "Item 2", description: "Another item"},
 	];
 
-	const checkboxChange = (itemId: number, itemData: Item) => {
+	const checkboxChange = (
+		itemId: number,
+		itemData: Item,
+		callback: () => void
+	) => {
 		setCheckedItems((prevState) =>
 			prevState.some((item) => item.id === itemId)
 				? prevState.filter((item) => item.id !== itemId)
 				: [...prevState, itemData]
 		);
+		callback();
 	};
 
 	return (
@@ -45,17 +51,19 @@ function App() {
 								<td>{item.name}</td>
 								<td>{item.description}</td>
 								<td>
-									<input
-										type="checkbox"
-										name={`item-${item.id}`}
-										id={`item-${item.id}`}
+									<Checkbox
 										checked={checkedItems.some(
 											(checkedItem) =>
 												checkedItem.id === item.id
 										)}
-										onChange={() =>
-											checkboxChange(item.id, item)
-										}
+										onChange={(e) => {
+											const isChecked = e.target.checked;
+											const itemId = item.id;
+
+											checkboxChange(itemId, item, () => {
+												console.log(isChecked);
+											});
+										}}
 									/>
 								</td>
 							</tr>
