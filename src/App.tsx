@@ -13,8 +13,8 @@ interface Item {
 function App() {
 	const [checkedItems, setCheckedItems] = useState<Item[]>([]);
 	const items: Item[] = [
-		{ id: 1, name: "Item 1", description: "idk"},
-		{ id: 2, name: "Item 2", description: "Another item"},
+		{ id: 1, name: "Item 1", description: "idk" },
+		{ id: 2, name: "Item 2", description: "Another item" },
 	];
 
 	const checkboxChange = (
