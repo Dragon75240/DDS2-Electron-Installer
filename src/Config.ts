@@ -17,6 +17,19 @@ export class ConfigWriter {
 		return ConfigWriter.instance;
 	}
 
+	public async getConfig(): Promise<Config> {
+		const configDir = await this.getConfigDirectory();
+		const filePath = `${configDir}/config.json`;
+
+		try {
+			const data = await fs.readJson(filePath);
+			return data as Config;
+		} catch (error) {
+			console.warn("No config file found. Returning default values.");
+			return {} as Config;
+		}
+	}
+
 	public async saveConfig(config: Config): Promise<void> {
 		const configDir = await this.getConfigDirectory();
 		const filePath = `${configDir}/config.json`;

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import "./App.css";
 import { Checkbox } from "antd";
+import { ConfigWriter } from "./Config";
 
 interface Item {
 	id: number;
@@ -29,6 +30,12 @@ function App() {
 		);
 		callback();
 	};
+
+	const localConfigHandler = () => {
+		const _LconfigHandler = ConfigWriter.getInstance();
+
+		
+	}
 
 	return (
 		<>
